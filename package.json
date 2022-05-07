@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/Gabmelom/movie-database#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mongoose": "^6.3.2",
+    "pug": "^3.0.2"
   }
 }
