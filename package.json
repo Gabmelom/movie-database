@@ -1,0 +1,28 @@
+{
+  "name": "movie-database",
+  "version": "1.0.0",
+  "description": "A web application that allows users to post reviews about movies and follow their favourite actors",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gabmelom/movie-database.git"
+  },
+  "keywords": [
+    "node",
+    "mongodb",
+    "express"
+  ],
+  "author": "Gabriel Melo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gabmelom/movie-database/issues"
+  },
+  "homepage": "https://github.com/Gabmelom/movie-database#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
