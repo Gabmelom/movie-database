@@ -4,8 +4,8 @@
   "description": "A web application that allows users to post reviews about movies and follow their favourite actors",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js"
   },
   "repository": {
     "type": "git",
@@ -23,8 +23,10 @@
   },
   "homepage": "https://github.com/Gabmelom/movie-database#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.18.1",
     "mongoose": "^6.3.2",
+    "nodemon": "^2.0.16",
     "pug": "^3.0.2"
   }
 }
