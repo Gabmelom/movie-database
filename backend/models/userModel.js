@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 let userSchema = mongoose.Schema({
 	username: {
@@ -11,14 +11,12 @@ let userSchema = mongoose.Schema({
         type: String,
         required: true,
         minlength: 1,
-        maxlength: 256
+        maxlength: 255
     },
     contributing: { type: Boolean, default: false },
-    reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
     usersFollowing: [{ type: String, ref: 'User' }],
     peopleFollowing: [{ type: String, ref: 'Person' }],
     watchlist: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
-    notifications: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Notification' }]
 },
 {
     timestamps: true
@@ -36,7 +34,7 @@ userSchema.methods.findFollowers = function (callback) {
 
 // Instance method: Sends given notification object to all of user's followers
 userSchema.methods.sendNotification = function (notification, callback) {
- //TODO ??   
+ //TODO
 }
 
 module.exports = mongoose.model("User", userSchema);

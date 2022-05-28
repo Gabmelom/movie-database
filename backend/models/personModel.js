@@ -1,18 +1,20 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let personSchema = Schema({
 	name: {
 		type: String,
 		required: true,
+        index: true,
 		minlength: 1,
-		maxlength: 40
+		maxlength: 64
 	},
     director: [{ type: Schema.Types.ObjectId, ref: 'Movie' }],
     writer: [{ type: Schema.Types.ObjectId, ref: 'Movie' }],
     actor: [{ type: Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
+// TODO improve below
 // Instance method: Find top 5 collaborators of a person, returns 
 personSchema.methods.top5Collaborators = function (callback) {
     // Find movies where current person was part of cast
@@ -65,8 +67,8 @@ personSchema.methods.top5Collaborators = function (callback) {
 
 // Instance method: Find all users that follow this person
 personSchema.methods.findFollowers = function (callback) {
-    this.model("User").find().
-    where("peopleFollowing").in(this._id).
+    this.model('User').find().
+    where('peopleFollowing').in(this._id).
     select('notifications').
     exec(callback);
 }
@@ -81,4 +83,4 @@ personSchema.methods.sendNotification = function (notification, callback) {
     });
 }
 
-module.exports = mongoose.model("Person", personSchema);
+module.exports = mongoose.model('Person', personSchema);

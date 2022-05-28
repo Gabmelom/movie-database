@@ -1,23 +1,23 @@
-const path = require('path')
-const express = require('express');
-const dotenv = require('dotenv').config();
+const path = require('path');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv').config();
+const express = require('express');
 
-// Initializing application
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 const app = express();
 
-// Express middleware
-app.set('views');
+app.set('views', path.join(__dirname,'views'));
 app.set('view engine', 'pug');
-app.use(express.static('public'));
+app.use(express.static(path.resolve(__dirname,'../','frontend','public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (_,res) => { res.send('Hello! Your app is working!') });
+// Routes
+app.get('/', (_,res) => res.render('home'));
+app.use('/movies', require('./routes/movieRoutes'));
 
 // Connecting to Mongo Atlas database
-mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology:true});
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology:true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to database'));
 db.once('open', () => {
