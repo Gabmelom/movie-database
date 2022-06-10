@@ -2,6 +2,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv').config();
 const express = require('express');
+const { errorHandler } = require('./middleware/errorMiddleware')
 
 const PORT = process.env.PORT || 8000;
 const app = express();
@@ -15,6 +16,9 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.get('/', (_,res) => res.render('home'));
 app.use('/movies', require('./routes/movieRoutes'));
+app.use('/persons', require('./routes/personRoutes'));
+
+app.use(errorHandler);
 
 // Connecting to Mongo Atlas database
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology:true});
