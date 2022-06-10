@@ -24,4 +24,15 @@ router.get('/', asyncHandler(async (req, res) => {
     res.status(200).json(persons);
 }));
 
+router.post('/', asyncHandler(async (req,res) => {
+    try {
+        let person = await Person.create({...req.body});
+        res.status(201).json(person);   
+    } catch (error) {
+        if (error.name === 'ValidationError')
+            res.status(400)
+        throw error
+    }
+}));
+
 module.exports = router;

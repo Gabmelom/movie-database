@@ -30,6 +30,17 @@ router.get('/', asyncHandler(async (req,res) => {
     res.status(200).json(movies);
 }));
 
+router.post('/', asyncHandler(async (req,res) => {
+    try {
+        let movie = await Movie.create({...req.body});
+        res.status(201).json(movie);   
+    } catch (error) {
+        if (error.name === 'ValidationError')
+            res.status(400)
+        throw error
+    }
+}));
+
 router.param('id', async (req, res, next, id) => {
     try {
         req.movie = await Movie.findById(id);
@@ -47,17 +58,6 @@ router.param('id', async (req, res, next, id) => {
 
 router.get('/:id', asyncHandler(async (req,res) => {
     res.status(200).json(req.movie);
-}));
-
-router.post('/', asyncHandler(async (req,res) => {
-    try {
-        let movie = await Movie.create({...req.body});
-        res.status(201).json(movie);   
-    } catch (error) {
-        if (error.name === 'ValidationError')
-            res.status(400)
-        throw error
-    }
 }));
 
 router.delete('/:id', asyncHandler(async (req,res) => {
