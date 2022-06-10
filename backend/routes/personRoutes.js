@@ -35,4 +35,23 @@ router.post('/', asyncHandler(async (req,res) => {
     }
 }));
 
+router.param('id', async (req, res, next, id) => {
+    try {
+        req.person = await Person.findById(id);
+        if (req.person === null){
+            res.status(404);
+            return next(new Error('Person not found'));
+        }
+        next();
+    } catch (error) {
+        if (error.name === 'CastError') 
+            res.status(404);
+        next(error);
+    }
+});
+
+router.get('/:id', asyncHandler(async (req,res) => {
+    res.json(req.person);
+}));
+
 module.exports = router;
