@@ -5,4 +5,23 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Home
     body 
-        h1 Hello, your app is working!
+        h1 MovieDB
+        h4 Search movie 
+        form(action="/movies", method="get")
+            label(for="movie-title") Title 
+            input#movie-title(type="text" name="title")
+            br
+            label(for="movie-genre") Genre
+            input#movie-genre(type="text" name="genre")
+            br
+            label(for="movie-year") Year
+            input#movie-year(type="number" name="year" min="1950")
+            br
+            input(type="submit" value="Submit")
+            
+        h4 Search people
+        form(action="/persons", method="get") 
+            label(for="person-name") Name
+            input#person-name(type="text" name="name")
+            br
+            input(type="submit" value="Submit")
