@@ -54,4 +54,9 @@ router.get('/:id', asyncHandler(async (req,res) => {
     res.json(req.person);
 }));
 
+router.delete('/:id', asyncHandler(async (req,res) => {
+    await req.person.remove();
+    res.status(204).send();
+}));
+
 module.exports = router;
